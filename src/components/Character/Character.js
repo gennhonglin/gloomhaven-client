@@ -2,9 +2,9 @@ import "./Character.scss";
 
 function Character() {
     return(
-        <div className="character">
+        <section className="character">
 
-        </div>
+        </section>
     )
 }
 
