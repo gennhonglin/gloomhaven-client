@@ -56,7 +56,7 @@ function Prosperity() {
             <h2 className="prosperity__title">Prosperity Level: {prosperityLevel}</h2>
             <div className="prosperity__input">
                 <button onClick={minusButton}>-</button>
-                <input type="range" min="0" max="100" value={prosperityPoint} onChange={e => {sliderUpdate(e.target.value);}} className="prosperity__input-slider"></input>
+                <input type="range" min="0" max="100" value={prosperityPoint} onChange={e => {sliderUpdate(parseInt(e.target.value,10));}} className="prosperity__input-slider"></input>
                 <button onClick={plusButton}>+</button>
             </div>
             <h3>{prosperityPoint}</h3>
