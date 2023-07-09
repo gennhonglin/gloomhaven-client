@@ -4,6 +4,7 @@
     position: sticky;
     top: 0px;
     background-color: #783F20;
+    z-index: 99;
     &__nav {
         display: flex;
         width: 100%;
@@ -59,7 +60,7 @@
             position: fixed;
             width: 100%;
             min-height: 100vh;
-            top: 2.375rem;
+            top: 2.6875rem;
             left: 100%;
             z-index: 98;
             display: block;
