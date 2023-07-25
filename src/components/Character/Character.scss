@@ -204,6 +204,8 @@
                     &__check {
                         width: 33.3333%;
                         font-size: 1rem;
+                        display: flex;
+                        justify-content: space-evenly;
                     }
                     
                 }
@@ -218,6 +220,8 @@
                     &__check {
                         width: 33.3333%;
                         font-size: 1rem;
+                        display: flex;
+                        justify-content: space-evenly;
                     }
                 }
             }
