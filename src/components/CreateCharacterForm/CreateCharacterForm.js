@@ -1,6 +1,10 @@
 import "./CreateCharacterForm.scss";
+//Import Gear Components
 import HeadGear from "../HeadGear/HeadGear";
 import BodyGear from "../BodyGear/BodyGear";
+import BootGear from "../BootGear/BootGear";
+
+//Import Class Images
 import Brute from "../../assets/images/character-imgs/Brute.webp";
 import Tinkerer from "../../assets/images/character-imgs/Tinkerer.webp";
 import Berserker from "../../assets/images/character-imgs/Berserker.webp";
@@ -36,11 +40,13 @@ function CreateCharacterForm() {
     //Display Gear on click
     const [displayHeadGear, setDisplayHeadGear] = useState(false);
     const [displayBodyGear, setDisplayBodyGear] = useState(false);
+    const [displayBootGear, setDisplayBootGear] = useState(false);
 
     //user selected items
-
     const [chosenHead, setChosenHead] = useState(null);
     const [chosenBody, setChosenBody] = useState(null);
+    const [chosenBoot, setChosenBoot] = useState(null);
+
     //Contain the data being given and storing them
     const [characterName, setCharacterName] = useState("");
     const [expCounter, setExpCounter] = useState(0);
@@ -182,6 +188,24 @@ function CreateCharacterForm() {
                 <div className="create-form__card__items__left__gear">
                     <h3 className="create-form__card__items__left__gear-title">Body</h3>
                     <img className="create-form__card__items__left__gear-img" src={chosenBody} onClick={() => {setDisplayItems("create-form__card__items hidden"); setDisplayBodyGear(true);}}></img>
+                </div>);
+        }
+    }
+
+    const checkBoot = () => {
+        if(chosenBoot === null) {
+            return (      
+            <div className="create-form__card__items__left__gear">
+                <h3 className="create-form__card__items__left__gear-title">Boots</h3>
+                <div className="create-form__card__items__left__gear-add" onClick={() => {setDisplayItems("create-form__card__items hidden"); setDisplayBootGear(true);}}>
+                    <h2 className="create-form__card__items__left__gear-add__plus">+</h2>
+                </div>
+            </div>);
+        } else {
+            return (      
+                <div className="create-form__card__items__left__gear">
+                    <h3 className="create-form__card__items__left__gear-title">Boots</h3>
+                    <img className="create-form__card__items__left__gear-img" src={chosenBoot} onClick={() => {setDisplayItems("create-form__card__items hidden"); setDisplayBootGear(true);}}></img>
                 </div>);
         }
     }
@@ -446,12 +470,8 @@ function CreateCharacterForm() {
                             </div>
                         </div>
 
-                        <div className="create-form__card__items__left__gear">
-                            <h3 className="create-form__card__items__left__gear-title">Boots</h3>
-                            <div className="create-form__card__items__left__gear-add">
-                                <h2 className="create-form__card__items__left__gear-add__plus">+</h2>
-                            </div>
-                        </div>
+                        {checkBoot()}
+            
                     </div>
 
                     <div className="create-form__card__items__right">
@@ -483,7 +503,8 @@ function CreateCharacterForm() {
                 
                 </div>
                 <HeadGear displayHeadGear = {displayHeadGear} displayHeadChange = {setDisplayHeadGear} displayHeadComp = {setDisplayItems} chosenHead = {setChosenHead}/>
-                <BodyGear displayBodyGear = {displayBodyGear} displayBodyChange = {setDisplayBodyGear} displayBodyComp = {setDisplayItems} chosenBody = {setChosenBody}/>    
+                <BodyGear displayBodyGear = {displayBodyGear} displayBodyChange = {setDisplayBodyGear} displayBodyComp = {setDisplayItems} chosenBody = {setChosenBody}/>
+                <BootGear displayBootGear = {displayBootGear} displayBootChange = {setDisplayBootGear} displayBootComp = {setDisplayItems} chosenBoot = {setChosenBoot}/>    
             </div>
 
         </form>
