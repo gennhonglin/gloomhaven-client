@@ -1,4 +1,6 @@
 import "./CreateCharacterForm.scss";
+import HeadGear from "../HeadGear/HeadGear";
+import BodyGear from "../BodyGear/BodyGear";
 import Brute from "../../assets/images/character-imgs/Brute.webp";
 import Tinkerer from "../../assets/images/character-imgs/Tinkerer.webp";
 import Berserker from "../../assets/images/character-imgs/Berserker.webp";
@@ -30,6 +32,15 @@ function CreateCharacterForm() {
     const [hideCharacterName, setHideCharacterName] = useState("create-form__card__character-name");
     const [classTitle, setClassTitle] = useState("create-form__select-class");
     const [selectedImg, setSelectedImg] = useState(null);
+
+    //Display Gear on click
+    const [displayHeadGear, setDisplayHeadGear] = useState(false);
+    const [displayBodyGear, setDisplayBodyGear] = useState(false);
+
+    //user selected items
+
+    const [chosenHead, setChosenHead] = useState(null);
+    const [chosenBody, setChosenBody] = useState(null);
     //Contain the data being given and storing them
     const [characterName, setCharacterName] = useState("");
     const [expCounter, setExpCounter] = useState(0);
@@ -136,6 +147,43 @@ function CreateCharacterForm() {
         } else if(!event.target.checked) {
             setPerkCounter(perkCounter - 1);
         } 
+    }
+
+    const checkHead = () => {
+        if(chosenHead === null) {
+            return (      
+            <div className="create-form__card__items__left__gear">
+                <h3 className="create-form__card__items__left__gear-title">Head</h3>
+                <div className="create-form__card__items__left__gear-add" onClick={() => {setDisplayItems("create-form__card__items hidden"); setDisplayHeadGear(true);}}>
+                    <h2 className="create-form__card__items__left__gear-add__plus">+</h2>
+                </div>
+            </div>);
+        } else {
+            return (      
+                <div className="create-form__card__items__left__gear">
+                    <h3 className="create-form__card__items__left__gear-title">Head</h3>
+                    <img className="create-form__card__items__left__gear-img" src={chosenHead} onClick={() => {setDisplayItems("create-form__card__items hidden"); setDisplayHeadGear(true);}}></img>
+                </div>);
+        }
+    }
+
+    
+    const checkBody = () => {
+        if(chosenBody === null) {
+            return (      
+            <div className="create-form__card__items__left__gear">
+                <h3 className="create-form__card__items__left__gear-title">Body</h3>
+                <div className="create-form__card__items__left__gear-add" onClick={() => {setDisplayItems("create-form__card__items hidden"); setDisplayBodyGear(true);}}>
+                    <h2 className="create-form__card__items__left__gear-add__plus">+</h2>
+                </div>
+            </div>);
+        } else {
+            return (      
+                <div className="create-form__card__items__left__gear">
+                    <h3 className="create-form__card__items__left__gear-title">Body</h3>
+                    <img className="create-form__card__items__left__gear-img" src={chosenBody} onClick={() => {setDisplayItems("create-form__card__items hidden"); setDisplayBodyGear(true);}}></img>
+                </div>);
+        }
     }
 
     
@@ -383,24 +431,13 @@ function CreateCharacterForm() {
                         <button className="create-form__card__perks__enter" onClick={hidePerks}>Enter</button>
                 </div>
                 <div className={displayItems}>
-                <div className="create-form__card__items__back">
+                    <div className="create-form__card__items__back">
                         <a className="create-form__card__items__back-button" onClick={() => { setDisplayPerks("create-form__card__perks"); setDisplayItems("create-form__card__items hidden");}}>BACK</a> 
                     </div>
                     <div className="create-form__card__items__left">
-                        <div className="create-form__card__items__left__gear">
-                            <h3 className="create-form__card__items__left__gear-title">Head</h3>
-                            <div className="create-form__card__items__left__gear-add">
-                                <h2 className="create-form__card__items__left__gear-add__plus">+</h2>
-                            </div>
-                        </div>
-
-                        <div className="create-form__card__items__left__gear">
-                            <h3 className="create-form__card__items__left__gear-title">Body</h3>
-                            <div className="create-form__card__items__left__gear-add">
-                                <h2 className="create-form__card__items__left__gear-add__plus">+</h2>
-                            </div>
-                            
-                        </div>
+                        {checkHead()}
+                        
+                        {checkBody()}
 
                         <div className="create-form__card__items__left__gear">
                             <h3 className="create-form__card__items__left__gear-title">Hands</h3>
@@ -444,7 +481,9 @@ function CreateCharacterForm() {
                         </div>
                     </div>
                 
-                </div>   
+                </div>
+                <HeadGear displayHeadGear = {displayHeadGear} displayHeadChange = {setDisplayHeadGear} displayHeadComp = {setDisplayItems} chosenHead = {setChosenHead}/>
+                <BodyGear displayBodyGear = {displayBodyGear} displayBodyChange = {setDisplayBodyGear} displayBodyComp = {setDisplayItems} chosenBody = {setChosenBody}/>    
             </div>
 
         </form>
