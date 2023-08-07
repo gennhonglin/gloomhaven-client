@@ -3,6 +3,9 @@ import "./CreateCharacterForm.scss";
 import HeadGear from "../HeadGear/HeadGear";
 import BodyGear from "../BodyGear/BodyGear";
 import BootGear from "../BootGear/BootGear";
+import HandGear from "../HandGear/HandGear";
+import HandGearSecond from "../HandGearSecond/HandGearSecond";
+import SmallItemOne from "../SmallItemOne/SmallItemOne";
 
 //Import Class Images
 import Brute from "../../assets/images/character-imgs/Brute.webp";
@@ -22,7 +25,10 @@ import Soothsinger from "../../assets/images/character-imgs/Soothsinger.webp";
 import SpellWeaver from "../../assets/images/character-imgs/SpellWeaver.webp";
 import Summoner from "../../assets/images/character-imgs/Summoner.webp";
 import Sunkeeper from "../../assets/images/character-imgs/Sunkeeper.webp";
-import { useEffect, useRef, useState } from "react";
+import { useEffect
+    , useState } from "react";
+import SmallItemTwo from "../SmallItemTwo/SmallItemTwo";
+import SmallItemThree from "../SmallItemThree/SmallItemThree";
 
 function CreateCharacterForm() {
     //Hide and display different parts of the form
@@ -40,11 +46,26 @@ function CreateCharacterForm() {
     //Display Gear on click
     const [displayHeadGear, setDisplayHeadGear] = useState(false);
     const [displayBodyGear, setDisplayBodyGear] = useState(false);
+    const [displayHandGear, setDisplayHandGear] = useState(false);
+    const [displayHandGearSecond, setDisplayHandGearSecond] = useState(false);
     const [displayBootGear, setDisplayBootGear] = useState(false);
+    const [displaySmallItemOne, setDisplaySmallItemOne] = useState(false);
+    const [displaySmallItemTwo, setDisplaySmallItemTwo] = useState(false);
+    const [displaySmallItemThree, setDisplaySmallItemThree] = useState(false);
+
+    //Check if user selected hand gear is dual wielded
+    const [dualWield, setDualWield] = useState(false);
 
     //user selected items
+    //Change to objects so I dont have to have as many states.
     const [chosenHead, setChosenHead] = useState(null);
     const [chosenBody, setChosenBody] = useState(null);
+    const [chosenDualHanded, setChosenDualHanded] = useState(null);
+    const [chosenHand, setChosenHand] = useState(null);
+    const [chosenHandSecond, setChosenHandSecond] = useState(null);
+    const [chosenSmallItem, setChosenSmallItem] = useState(null);
+    const [chosenSmallItemTwo, setChosenSmallItemTwo] = useState(null);
+    const [chosenSmallItemThree, setChosenSmallItemThree] = useState(null);
     const [chosenBoot, setChosenBoot] = useState(null);
 
     //Contain the data being given and storing them
@@ -53,7 +74,10 @@ function CreateCharacterForm() {
     const [goldCounter, setGoldCounter] = useState(0);
     const [perkCounter, setPerkCounter] = useState(0);
 
+    //This useeffect is to display chosen image
     useEffect(()=> {
+
+        //Can change this to a map
         if(selectedClass === "Brute") {
             setSelectedImg(Brute);
         } else if(selectedClass === "Tinkerer"){
@@ -91,6 +115,7 @@ function CreateCharacterForm() {
         }
 
     }, [selectedClass])
+
 
     const setName = (event) => {
         if(event.target.value.length < 3 || event.target.value === "") {
@@ -168,7 +193,7 @@ function CreateCharacterForm() {
             return (      
                 <div className="create-form__card__items__left__gear">
                     <h3 className="create-form__card__items__left__gear-title">Head</h3>
-                    <img className="create-form__card__items__left__gear-img" src={chosenHead} onClick={() => {setDisplayItems("create-form__card__items hidden"); setDisplayHeadGear(true);}}></img>
+                    <img className="create-form__card__items__left__gear-img" alt="head-gear" src={chosenHead} onClick={() => {setDisplayItems("create-form__card__items hidden"); setDisplayHeadGear(true);}}></img>
                 </div>);
         }
     }
@@ -187,7 +212,118 @@ function CreateCharacterForm() {
             return (      
                 <div className="create-form__card__items__left__gear">
                     <h3 className="create-form__card__items__left__gear-title">Body</h3>
-                    <img className="create-form__card__items__left__gear-img" src={chosenBody} onClick={() => {setDisplayItems("create-form__card__items hidden"); setDisplayBodyGear(true);}}></img>
+                    <img className="create-form__card__items__left__gear-img" alt="body-gear" src={chosenBody} onClick={() => {setDisplayItems("create-form__card__items hidden"); setDisplayBodyGear(true);}}></img>
+                </div>);
+        }
+    }
+
+    const checkHands = () => {
+        if(dualWield === true) {
+            return (      
+                <div className="create-form__card__items__left__gear">
+                    <h3 className="create-form__card__items__left__gear-title">Hands</h3>
+                    <img className="create-form__card__items__left__gear-img" alt="dual-wield-hand-gear" src={chosenDualHanded} onClick={() => {setDisplayItems("create-form__card__items hidden"); setDisplayHandGear(true);}}></img>
+                </div>);
+        } else {
+            if(chosenHand === null) {
+                return (      
+                <div className="create-form__card__items__left__gear">
+                    <h3 className="create-form__card__items__left__gear-title">Hands</h3>
+                    <div className="create-form__card__items__left__gear-add" onClick={() => {setDisplayItems("create-form__card__items hidden"); setDisplayHandGear(true);}}>
+                        <h2 className="create-form__card__items__left__gear-add__plus">+</h2>
+                    </div>
+                </div>);
+            } else {
+                return (      
+                    <div className="create-form__card__items__left__gear">
+                        <h3 className="create-form__card__items__left__gear-title">Hands</h3>
+                        <img className="create-form__card__items__left__gear-img" alt="left-handed-gear" src={chosenHand} onClick={() => {setDisplayItems("create-form__card__items hidden"); setDisplayHandGear(true);}}></img>
+                    </div>);
+            }
+        } 
+    }
+
+    
+    const checkHandsSecond = () => {
+        if(dualWield === true) {
+            return (      
+                <div className="create-form__card__items__right__gear">
+                    <h3 className="create-form__card__items__right__gear-title">Hands</h3>
+                    <img className="create-form__card__items__right__gear-img" alt="dual-wielded-hand-gear" src={chosenDualHanded} onClick={() => {setDisplayItems("create-form__card__items hidden"); setDisplayHandGearSecond(true);}}></img>
+                </div>);
+        } else {
+            if(chosenHandSecond === null) {
+                return (      
+                <div className="create-form__card__items__right__gear">
+                    <h3 className="create-form__card__items__right__gear-title">Hands</h3>
+                    <div className="create-form__card__items__right__gear-add" onClick={() => {setDisplayItems("create-form__card__items hidden"); setDisplayHandGearSecond(true);}}>
+                        <h2 className="create-form__card__items__right__gear-add__plus">+</h2>
+                    </div>
+                </div>);
+            } else {
+                return (      
+                    <div className="create-form__card__items__right__gear">
+                        <h3 className="create-form__card__items__right__gear-title">Hands</h3>
+                        <img className="create-form__card__items__right__gear-img" alt="right-hand-gear" src={chosenHandSecond} onClick={() => {setDisplayItems("create-form__card__items hidden"); setDisplayHandGearSecond(true);}}></img>
+                    </div>);
+            }
+        }
+
+    }
+
+    const checkSmallItemOne = () => {
+        if(chosenSmallItem === null) {
+            return(
+                <div className="create-form__card__items__right__gear">
+                    <h3 className="create-form__card__items__right__gear-title">Small Item</h3>
+                    <div className="create-form__card__items__right__gear-add" onClick={() => {setDisplayItems("create-form__card__items hidden"); setDisplaySmallItemOne(true);}}>
+                        <h2 className="create-form__card__items__right__gear-add__plus">+</h2>
+                    </div>
+                </div>
+            )
+        } else {
+            return (      
+                <div className="create-form__card__items__right__gear">
+                    <h3 className="create-form__card__items__right__gear-title">Small Item</h3>
+                    <img className="create-form__card__items__right__gear-img" alt="body-gear" src={chosenSmallItem} onClick={() => {setDisplayItems("create-form__card__items hidden"); setDisplaySmallItemOne(true);}}></img>
+                </div>);
+        }
+    }
+
+    const checkSmallItemTwo = () => {
+        if(chosenSmallItemTwo === null) {
+            return(
+                <div className="create-form__card__items__right__gear">
+                    <h3 className="create-form__card__items__right__gear-title">Small Item</h3>
+                    <div className="create-form__card__items__right__gear-add" onClick={() => {setDisplayItems("create-form__card__items hidden"); setDisplaySmallItemTwo(true);}}>
+                        <h2 className="create-form__card__items__right__gear-add__plus">+</h2>
+                    </div>
+                </div>
+            )
+        } else {
+            return (      
+                <div className="create-form__card__items__right__gear">
+                    <h3 className="create-form__card__items__right__gear-title">Small Item</h3>
+                    <img className="create-form__card__items__right__gear-img" alt="body-gear" src={chosenSmallItemTwo} onClick={() => {setDisplayItems("create-form__card__items hidden"); setDisplaySmallItemTwo(true);}}></img>
+                </div>);
+        }
+    }
+
+    const checkSmallItemThree = () => {
+        if(chosenSmallItemThree === null) {
+            return(
+                <div className="create-form__card__items__right__gear">
+                    <h3 className="create-form__card__items__right__gear-title">Small Item</h3>
+                    <div className="create-form__card__items__right__gear-add" onClick={() => {setDisplayItems("create-form__card__items hidden"); setDisplaySmallItemThree(true);}}>
+                        <h2 className="create-form__card__items__right__gear-add__plus">+</h2>
+                    </div>
+                </div>
+            )
+        } else {
+            return (      
+                <div className="create-form__card__items__right__gear">
+                    <h3 className="create-form__card__items__right__gear-title">Small Item</h3>
+                    <img className="create-form__card__items__right__gear-img" alt="body-gear" src={chosenSmallItemThree} onClick={() => {setDisplayItems("create-form__card__items hidden"); setDisplaySmallItemThree(true);}}></img>
                 </div>);
         }
     }
@@ -205,7 +341,7 @@ function CreateCharacterForm() {
             return (      
                 <div className="create-form__card__items__left__gear">
                     <h3 className="create-form__card__items__left__gear-title">Boots</h3>
-                    <img className="create-form__card__items__left__gear-img" src={chosenBoot} onClick={() => {setDisplayItems("create-form__card__items hidden"); setDisplayBootGear(true);}}></img>
+                    <img className="create-form__card__items__left__gear-img" alt="boot-gear" src={chosenBoot} onClick={() => {setDisplayItems("create-form__card__items hidden"); setDisplayBootGear(true);}}></img>
                 </div>);
         }
     }
@@ -391,7 +527,7 @@ function CreateCharacterForm() {
                 <h2 className="create-form__card-title">{selectedClass}</h2>
                 <div className={hideCharacterName}>
                     <div className="create-form__card__character-name__back">
-                        <a className="create-form__card__character-name__back-button" onClick={() => {  setDisplayClass("create-form__class"); setCardDisplay("create-form__card hidden"); setClassTitle("create-form__select-class");}}>BACK</a> 
+                        <h2 className="create-form__card__character-name__back-button" onClick={() => {  setDisplayClass("create-form__class"); setCardDisplay("create-form__card hidden"); setClassTitle("create-form__select-class");}}>BACK</h2> 
                     </div>
                     <label className="create-form__card__character-name__name">Character Name: </label>
                     <input className="create-form__card__character-name__input" type="text" id="cname" name="cname" minLength="3" maxLength="20" defaultValue={characterName} onChange={setName} required></input>
@@ -399,7 +535,7 @@ function CreateCharacterForm() {
                 </div>
                 <div className={displayExp}>
                     <div className="create-form__card__exp__back">
-                        <a className="create-form__card__exp__back-button" onClick={() => { setHideCharacterName("create-form__card__character-name"); setDisplayExp("create-form__card__exp hidden");}}>BACK</a> 
+                        <h2 className="create-form__card__exp__back-button" onClick={() => { setHideCharacterName("create-form__card__character-name"); setDisplayExp("create-form__card__exp hidden");}}>BACK</h2> 
                     </div>
                     <label className="create-form__card__exp__title">EXP: </label>
                     <input className="create-form__card__character-name__input" type="number" id="exp" name="exp" min="0" max="500" defaultValue="0" onChange={setExp} required></input>
@@ -407,7 +543,7 @@ function CreateCharacterForm() {
                 </div>
                 <div className={displayGold}>
                     <div className="create-form__card__gold__back">
-                        <a className="create-form__card__gold__back-button" onClick={() => { setDisplayExp("create-form__card__exp"); setDisplayGold("create-form__card__gold hidden");}}>BACK</a> 
+                        <h2 className="create-form__card__gold__back-button" onClick={() => { setDisplayExp("create-form__card__exp"); setDisplayGold("create-form__card__gold hidden");}}>BACK</h2> 
                     </div>
                     <label className="create-form__card__gold__title">Gold: </label>
                     <input className="create-form__card__character-name__input" type="number" id="exp" name="exp" min="0" max="2000" defaultValue="0" onChange={setGold} required></input>
@@ -415,7 +551,7 @@ function CreateCharacterForm() {
                 </div>
                 <div className={displayPerks}>
                     <div className="create-form__card__perks__back">
-                        <a className="create-form__card__perks__back-button" onClick={() => { setDisplayGold("create-form__card__gold"); setDisplayPerks("create-form__card__perks hidden");}}>BACK</a> 
+                        <h2 className="create-form__card__perks__back-button" onClick={() => { setDisplayGold("create-form__card__gold"); setDisplayPerks("create-form__card__perks hidden");}}>BACK</h2> 
                     </div>
                     <h2 className="create-form__card__perks__title">Perks</h2>
                     <div className="create-form__card__perks__top">
@@ -456,54 +592,37 @@ function CreateCharacterForm() {
                 </div>
                 <div className={displayItems}>
                     <div className="create-form__card__items__back">
-                        <a className="create-form__card__items__back-button" onClick={() => { setDisplayPerks("create-form__card__perks"); setDisplayItems("create-form__card__items hidden");}}>BACK</a> 
+                        <h2 className="create-form__card__items__back-button" onClick={() => { setDisplayPerks("create-form__card__perks"); setDisplayItems("create-form__card__items hidden");}}>BACK</h2> 
                     </div>
                     <div className="create-form__card__items__left">
                         {checkHead()}
                         
                         {checkBody()}
 
-                        <div className="create-form__card__items__left__gear">
-                            <h3 className="create-form__card__items__left__gear-title">Hands</h3>
-                            <div className="create-form__card__items__left__gear-add">
-                                <h2 className="create-form__card__items__left__gear-add__plus">+</h2>
-                            </div>
-                        </div>
+                        {checkHands()}
 
                         {checkBoot()}
             
                     </div>
 
                     <div className="create-form__card__items__right">
-                        <div className="create-form__card__items__right__gear">
-                            <h3 className="create-form__card__items__right__gear-title">Potion</h3>
-                            <div className="create-form__card__items__right__gear-add">
-                                <h2 className="create-form__card__items__right__gear-add__plus">+</h2>
-                            </div>
-                        </div>
-                        <div className="create-form__card__items__right__gear">
-                            <h3 className="create-form__card__items__right__gear-title">Potion</h3>
-                            <div className="create-form__card__items__right__gear-add">
-                                <h2 className="create-form__card__items__right__gear-add__plus">+</h2>
-                            </div>
-                        </div>
-                        <div className="create-form__card__items__right__gear">
-                            <h3 className="create-form__card__items__right__gear-title">Hands</h3>
-                            <div className="create-form__card__items__right__gear-add">
-                                <h2 className="create-form__card__items__right__gear-add__plus">+</h2>
-                            </div>
-                        </div>
-                        <div className="create-form__card__items__right__gear">
-                            <h3 className="create-form__card__items__right__gear-title">Potion</h3>
-                            <div className="create-form__card__items__right__gear-add">
-                                <h2 className="create-form__card__items__right__gear-add__plus">+</h2>
-                            </div>
-                        </div>
+                        {checkSmallItemOne()}
+
+                        {checkSmallItemTwo()}
+
+                        {checkHandsSecond()}
+
+                        {checkSmallItemThree()}
                     </div>
                 
                 </div>
                 <HeadGear displayHeadGear = {displayHeadGear} displayHeadChange = {setDisplayHeadGear} displayHeadComp = {setDisplayItems} chosenHead = {setChosenHead}/>
                 <BodyGear displayBodyGear = {displayBodyGear} displayBodyChange = {setDisplayBodyGear} displayBodyComp = {setDisplayItems} chosenBody = {setChosenBody}/>
+                <HandGear displayHandGear = {displayHandGear} displayHandChange = {setDisplayHandGear} displayHandComp = {setDisplayItems}  chosenHand = {setChosenHand} chosenHandSecond = {setChosenHandSecond} chosenDualHanded = {setChosenDualHanded} dualWield = {setDualWield}/>
+                <HandGearSecond displayHandGear = {displayHandGearSecond} displayHandChange = {setDisplayHandGearSecond} displayHandComp = {setDisplayItems} chosenHand = {setChosenHandSecond} chosenHandSecond = {setChosenHand} chosenDualHanded = {setChosenDualHanded} dualWield = {setDualWield} />
+                <SmallItemOne displaySmallItemOne = {displaySmallItemOne} displaySmallItemChange = {setDisplaySmallItemOne} displaySmallItemComp = {setDisplayItems} chosenSmallItem = {setChosenSmallItem}></SmallItemOne>
+                <SmallItemTwo displaySmallItemOne = {displaySmallItemTwo} displaySmallItemChange = {setDisplaySmallItemTwo} displaySmallItemComp = {setDisplayItems} chosenSmallItem = {setChosenSmallItemTwo}></SmallItemTwo>
+                <SmallItemThree displaySmallItemOne = {displaySmallItemThree} displaySmallItemChange = {setDisplaySmallItemThree} displaySmallItemComp = {setDisplayItems} chosenSmallItem = {setChosenSmallItemThree}></SmallItemThree>
                 <BootGear displayBootGear = {displayBootGear} displayBootChange = {setDisplayBootGear} displayBootComp = {setDisplayItems} chosenBoot = {setChosenBoot}/>    
             </div>
 
