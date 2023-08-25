@@ -1,4 +1,4 @@
-.login {
+.sign-up {
     min-height: 100vh;
     background-color: #3C4662;
 
@@ -19,7 +19,7 @@
         border-radius: 10px;
         border: 1px solid rgba( 255, 255, 255, 0.18 );
         width: 16.25rem;
-        height: 28.125rem;
+        height: 31.25rem;
         margin: auto;
         display: flex;
         flex-direction: column;
@@ -44,7 +44,7 @@
         }
 
         &__form {
-            height: 9.375rem;
+            height: 15.625rem;
             display: flex;
             gap: 1.25rem;
             flex-direction: column;

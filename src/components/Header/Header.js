@@ -27,7 +27,7 @@ function Header() {
         <header className="header">
             <nav className="header__nav">
                 <div className="header__nav__logo">
-                    <Link to={'/'}><img className="header__nav__logo-img" alt="GloomHaven Logo" src={Logo}/></Link>
+                    <Link to={'/Homepage'}><img className="header__nav__logo-img" alt="GloomHaven Logo" src={Logo}/></Link>
                 </div>
                 <button className={hamburger} onClick={updateMenu}>
                     <div className="header__nav-hamburger__bar"></div>

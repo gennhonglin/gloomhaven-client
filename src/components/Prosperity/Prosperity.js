@@ -1,8 +1,12 @@
 import "./Prosperity.scss";
+import jwt_decode from "jwt-decode";
 import {useEffect, useState} from "react";
 
 
 function Prosperity() {
+    const token = sessionStorage.getItem("token");
+    let user = jwt_decode(token);
+
 
     const [prosperityPoint, setProsperityPoint] = useState(0);
     const [prosperityLevel, setProsperityLevel] = useState(1);
