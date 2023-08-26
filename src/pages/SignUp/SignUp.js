@@ -22,7 +22,7 @@ function SignUp() {
             }
 
             axios.post('http://localhost:8080/party', signup);
-            navigate('/homepage');
+            navigate('/login');
         }
     }
 
