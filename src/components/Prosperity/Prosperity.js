@@ -8,7 +8,7 @@ function Prosperity() {
     const token = sessionStorage.getItem("token");
     let user = jwt_decode(token);
 
-    const [prosperityPoint, setProsperityPoint] = useState(user.prosperity_points);
+    const [prosperityPoint, setProsperityPoint] = useState(user.data.prosperity_points);
     const [prosperityLevel, setProsperityLevel] = useState(1);
 
 
@@ -20,19 +20,15 @@ function Prosperity() {
             }
 
 
-            axios.post(`http://localhost:8080/party/${user.data.party_id}`, updateProsperity)
+            axios.post(`http://localhost:8080/party/prosperity/${user.data.party_id}`, updateProsperity)
                 .then((response) => {
                     if(response.status === 204) {
-                        axios.get(`http://localhost:8080/party/${user.data.party_id}`)
+                        axios.get(`http://localhost:8080/party/prosperity/${user.data.party_id}`)
                         .then((result) => {
                             setProsperityPoint(result.data);
                         });
                     }
                 });
-
-        
-
-
 
         if (prosperityPoint < 5) {
             setProsperityLevel(1);

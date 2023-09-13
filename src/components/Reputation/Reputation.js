@@ -1,9 +1,32 @@
+import axios from "axios";
 import "./Reputation.scss";
 import { useEffect, useState } from "react";
+import jwt_decode from "jwt-decode";
 
-function Reputation() {
+function Reputation({rep}) {
+    const token = sessionStorage.getItem("token");
+    let user = jwt_decode(token);
 
-    const [sliderValue, setSliderValue] = useState(0);
+    const [sliderValue, setSliderValue] = useState(rep);
+
+
+    useEffect(() => {
+        
+        const updateReputation = {
+            party_id: user.data.party_id,
+            reputation: sliderValue
+        }
+
+        axios.post(`http://localhost:8080/party/reputation/${user.data.party_id}`, updateReputation)
+            .then((response) => {
+                if(response.status === 204) {
+                    axios.get(`http://localhost:8080/party/reputation/${user.data.party_id}`)
+                    .then((result) => {
+                        setSliderValue(result.data);
+                    });
+                }
+            });
+    }, [sliderValue])
 
     const minusButton = () => {
         if(sliderValue <= -20) {

@@ -25,10 +25,12 @@ import Soothsinger from "../../assets/images/character-imgs/Soothsinger.webp";
 import SpellWeaver from "../../assets/images/character-imgs/SpellWeaver.webp";
 import Summoner from "../../assets/images/character-imgs/Summoner.webp";
 import Sunkeeper from "../../assets/images/character-imgs/Sunkeeper.webp";
-import { useEffect
-    , useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SmallItemTwo from "../SmallItemTwo/SmallItemTwo";
 import SmallItemThree from "../SmallItemThree/SmallItemThree";
+import { useNavigate } from "react-router-dom";
+import jwt_decode from "jwt-decode";
+import axios from "axios";
 
 function CreateCharacterForm() {
     //Hide and display different parts of the form
@@ -74,6 +76,12 @@ function CreateCharacterForm() {
     const [goldCounter, setGoldCounter] = useState(0);
     const [perkCounter, setPerkCounter] = useState(0);
 
+    const navigate = useNavigate();
+    const form = useRef();
+    const token = sessionStorage.getItem("token");
+    let user = jwt_decode(token);
+
+
     //This useeffect is to display chosen image
     useEffect(()=> {
 
@@ -115,6 +123,54 @@ function CreateCharacterForm() {
         }
 
     }, [selectedClass])
+
+    const createCharacter = (e) => {
+        e.preventDefault();
+
+        let newChar;
+
+        if(dualWield) {
+            newChar = {
+                party_id: user.data.party_id,
+                class: selectedClass,
+                character_name: form.current.cname.value,
+                exp: form.current.exp.value,
+                gold: form.current.gold.value,
+                perks: perkCounter,
+                head_gear: chosenHead,
+                body_gear: chosenBody,
+                left_hand_gear: chosenDualHanded,
+                right_hand_gear: chosenDualHanded,
+                boots_gear: chosenBoot,
+                small_item_one: chosenSmallItem,
+                small_item_two: chosenSmallItemTwo,
+                small_item_three: chosenSmallItemThree,
+                small_item_four: null  
+            }
+        } else {
+            newChar = {
+                party_id: user.data.party_id,
+                class: selectedClass,
+                character_name: form.current.cname.value,
+                exp: form.current.exp.value,
+                gold: form.current.gold.value,
+                perks: perkCounter,
+                head_gear: chosenHead,
+                body_gear: chosenBody,
+                left_hand_gear: chosenHand,
+                right_hand_gear: chosenHandSecond,
+                boots_gear: chosenBoot,
+                small_item_one: chosenSmallItem,
+                small_item_two: chosenSmallItemTwo,
+                small_item_three: chosenSmallItemThree,
+                small_item_four: null  
+            }
+        }
+
+        axios.post('http://localhost:8080/character', newChar);
+        navigate('/homepage');
+
+    }
 
 
     const setName = (event) => {
@@ -352,7 +408,7 @@ function CreateCharacterForm() {
 
 
     return(
-        <form className="create-form">
+        <form onSubmit={createCharacter} className="create-form" ref={form}>
             <div className={classTitle}>
                 <h2 className="create-form__select-class__title">Select your Class</h2>
             </div>
@@ -546,7 +602,7 @@ function CreateCharacterForm() {
                         <h2 className="create-form__card__gold__back-button" onClick={() => { setDisplayExp("create-form__card__exp"); setDisplayGold("create-form__card__gold hidden");}}>BACK</h2> 
                     </div>
                     <label className="create-form__card__gold__title">Gold: </label>
-                    <input className="create-form__card__character-name__input" type="number" id="exp" name="exp" min="0" max="2000" defaultValue="0" onChange={setGold} required></input>
+                    <input className="create-form__card__character-name__input" type="number" id="gold" name="gold" min="0" max="2000" defaultValue="0" onChange={setGold} required></input>
                     <button className="create-form__card__character-name__button" onClick={hideGold}>Enter</button>
                 </div>
                 <div className={displayPerks}>
@@ -594,6 +650,11 @@ function CreateCharacterForm() {
                     <div className="create-form__card__items__back">
                         <h2 className="create-form__card__items__back-button" onClick={() => { setDisplayPerks("create-form__card__perks"); setDisplayItems("create-form__card__items hidden");}}>BACK</h2> 
                     </div>
+
+                    <div className="create-form__card__items__submit">
+                        <button type="submit" className="create-form__card__items__submit-button">Create</button>
+                    </div>
+
                     <div className="create-form__card__items__left">
                         {checkHead()}
                         

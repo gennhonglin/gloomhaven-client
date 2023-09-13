@@ -366,6 +366,28 @@
                 }
             }
 
+            &__submit {
+                position: absolute;
+                display: block;
+                width: 2.5rem;
+                top: 0;
+                right: 0;
+                padding: 1rem;
+                background-color: rgba($color: #FFFFFF, $alpha: 0.5);
+                border-radius: .625rem;
+                top: -3.75rem;
+                
+                &-button {
+                    padding-left: 0;
+                    width: 100%;
+                    text-align: center;
+                    background-color: rgba($color: #FFFFFF, $alpha: 0);
+                    color: black;
+                    font-size: 1.25rem;
+                    border: none;
+                }
+            }
+
             &__left {
                 display: flex;
                 flex-direction: column;
