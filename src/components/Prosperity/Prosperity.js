@@ -4,11 +4,11 @@ import jwt_decode from "jwt-decode";
 import {useEffect, useState} from "react";
 
 
-function Prosperity() {
+function Prosperity({prosperity}) {
     const token = sessionStorage.getItem("token");
     let user = jwt_decode(token);
 
-    const [prosperityPoint, setProsperityPoint] = useState(user.data.prosperity_points);
+    const [prosperityPoint, setProsperityPoint] = useState(prosperity);
     const [prosperityLevel, setProsperityLevel] = useState(1);
 
 

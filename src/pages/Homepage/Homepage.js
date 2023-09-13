@@ -27,7 +27,7 @@ function Homepage() {
         <div>
             <Header />
             <Character />
-            <Prosperity />
+            {data && <Prosperity prosperity = {data.prosperity_points}/>}
             {data && <Reputation rep = {data.reputation} />}
             <Footer />
         </div>
