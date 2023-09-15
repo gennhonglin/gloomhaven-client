@@ -32,58 +32,70 @@ import { Link } from "react-router-dom";
 function Character() {
     const token = sessionStorage.getItem("token");
     let user = jwt_decode(token);
-    const [exp, setExp] = useState(0);
+    // const [exp, setExp] = useState(0);
     const [gold, setGold] = useState(0);
     const [level, setLevel] = useState(1);
 
-    const [characters, setCharacters] = useState([])
+    const [characters, setCharacters] = useState([]);
 
     useEffect(() => {
         axios.get(`http://localhost:8080/character/${user.data.party_id}`)
             .then((response) => {
                 setCharacters(response.data);
             })
-    }, [characters])
+    }, [])
 
+
+    //For post
     useEffect(() => {
-        if(exp >= 45 && exp < 95) {
-            setLevel(2);
-        } else if (exp >= 95 && exp < 150) {
-            setLevel(3);
-        } else if (exp >= 150 && exp < 210) {
-            setLevel(4);
-        } else if (exp >= 210 && exp < 275) {
-            setLevel(5);
-        } else if (exp >= 275 && exp < 345) {
-            setLevel(6);
-        } else if (exp >= 345 && exp < 420) {
-            setLevel(7);
-        } else if (exp >= 420 && exp < 500) {
-            setLevel(8);
-        } else if (exp >= 500) {
-            setLevel(9);
-        } else if (exp < 45) {
-            setLevel(1);
-        }
+        console.log(JSON.stringify(characters));
+    }, [JSON.stringify(characters)]);
 
-    }, [exp])
+    // useEffect(() => {
+    //     if(exp >= 45 && exp < 95) {
+    //         setLevel(2);
+    //     } else if (exp >= 95 && exp < 150) {
+    //         setLevel(3);
+    //     } else if (exp >= 150 && exp < 210) {
+    //         setLevel(4);
+    //     } else if (exp >= 210 && exp < 275) {
+    //         setLevel(5);
+    //     } else if (exp >= 275 && exp < 345) {
+    //         setLevel(6);
+    //     } else if (exp >= 345 && exp < 420) {
+    //         setLevel(7);
+    //     } else if (exp >= 420 && exp < 500) {
+    //         setLevel(8);
+    //     } else if (exp >= 500) {
+    //         setLevel(9);
+    //     } else if (exp < 45) {
+    //         setLevel(1);
+    //     }
+
+    // }, [exp])
 
     //This function increments the exp by 1
-    const addExp = () => {
-        if(exp === 500) {
-            setExp(500);
-        } else {
-            setExp(exp + 1);
-        }
+    const addExp = (index) => {
+        // if(exp === 500) {
+        //     setExp(500);
+        // } else {
+        //     setCharacters(characters[index].exp++);
+        // }
+
+        let temp = characters;
+        
+        temp[index].exp++;
+        setCharacters(temp);
+        console.log(characters);
     }
 
     //This function decrements the exp by 1
     const subExp = () => {
-        if(exp === 0) {
-            setExp(0);
-        } else {
-            setExp(exp - 1);
-        }
+        // if(exp === 0) {
+        //     setExp(0);
+        // } else {
+        //     setExp(exp - 1);
+        // }
     }
 
     //This function increments the gold by 1
@@ -153,7 +165,7 @@ function Character() {
             </div>
 
             <div className="character__list">
-                {characters.map((data) => {
+                {characters.map((data, index) => {
                     return(
                     <div className="character__list__card">
                         <div className="character__list__card__front">
@@ -169,8 +181,8 @@ function Character() {
                                         <h3 className="character__list__card__front__middle-left__exp-title">Exp:</h3>
                                         <div className="character__list__card__front__middle-left__exp__container">
                                             <span className="character__list__card__front__middle-left__exp__container-button" onClick={subExp}>-</span>
-                                            <h3 className="character__list__card__front__middle-left__exp__container-points">{exp}</h3>
-                                            <span className="character__list__card__front__middle-left__exp__container-button" onClick={addExp}>+</span>
+                                            <h3 className="character__list__card__front__middle-left__exp__container-points">{data.exp}</h3>
+                                            <span className="character__list__card__front__middle-left__exp__container-button" onClick={() => addExp(index)}>+</span>
                                         </div>
                                     
                                     </div>
