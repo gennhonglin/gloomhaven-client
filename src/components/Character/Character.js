@@ -43,13 +43,13 @@ function Character() {
             .then((response) => {
                 setCharacters(response.data);
             })
-    }, [])
+    }, []);
 
 
     //For post
     useEffect(() => {
-        console.log(JSON.stringify(characters));
-    }, [JSON.stringify(characters)]);
+        
+    }, [characters]);
 
     // useEffect(() => {
     //     if(exp >= 45 && exp < 95) {
@@ -82,11 +82,11 @@ function Character() {
         //     setCharacters(characters[index].exp++);
         // }
 
-        let temp = characters;
+        let temp = [...characters];
         
-        temp[index].exp++;
+        temp[index].exp += 1;
         setCharacters(temp);
-        console.log(characters);
+
     }
 
     //This function decrements the exp by 1
