@@ -32,9 +32,6 @@ import { Link } from "react-router-dom";
 function Character() {
     const token = sessionStorage.getItem("token");
     let user = jwt_decode(token);
-    // const [exp, setExp] = useState(0);
-    const [gold, setGold] = useState(0);
-    const [level, setLevel] = useState(1);
 
     const [characters, setCharacters] = useState([]);
 
@@ -48,73 +45,130 @@ function Character() {
 
     //For post
     useEffect(() => {
-        
+        axios.post(`http://localhost:8080/character/${user.data.party_id}`, characters)
+            .then((response) => {
+                if(response.status === 204) {
+                }
+            })
+
     }, [characters]);
 
-    // useEffect(() => {
-    //     if(exp >= 45 && exp < 95) {
-    //         setLevel(2);
-    //     } else if (exp >= 95 && exp < 150) {
-    //         setLevel(3);
-    //     } else if (exp >= 150 && exp < 210) {
-    //         setLevel(4);
-    //     } else if (exp >= 210 && exp < 275) {
-    //         setLevel(5);
-    //     } else if (exp >= 275 && exp < 345) {
-    //         setLevel(6);
-    //     } else if (exp >= 345 && exp < 420) {
-    //         setLevel(7);
-    //     } else if (exp >= 420 && exp < 500) {
-    //         setLevel(8);
-    //     } else if (exp >= 500) {
-    //         setLevel(9);
-    //     } else if (exp < 45) {
-    //         setLevel(1);
-    //     }
-
-    // }, [exp])
 
     //This function increments the exp by 1
     const addExp = (index) => {
-        // if(exp === 500) {
-        //     setExp(500);
-        // } else {
-        //     setCharacters(characters[index].exp++);
-        // }
-
-        let temp = [...characters];
         
-        temp[index].exp += 1;
-        setCharacters(temp);
+        if(characters[index].exp === 500) {
+            return;
+        } else {
+            let temp = [...characters];
+            temp[index].exp++;
+            setCharacters(temp);
+        }
+
 
     }
 
     //This function decrements the exp by 1
-    const subExp = () => {
-        // if(exp === 0) {
-        //     setExp(0);
-        // } else {
-        //     setExp(exp - 1);
-        // }
+    const subExp = (index) => {
+        if(characters[index].exp === 0) {
+            return;
+        } else {
+            let temp = [...characters];
+            temp[index].exp--;
+            setCharacters(temp);
+        }
     }
 
     //This function increments the gold by 1
-    const addGold = () => {
-        if(gold === 2000) {
-            setGold(2000);
+    const addGold = (index) => {
+        if(characters[index].gold === 2000) {
+            return;
         } else {
-            setGold(gold + 1);
+            let temp = [...characters];
+            temp[index].gold++;
+            setCharacters(temp);
         }
     }
 
     //this function decrements the gold by 1
 
-    const subGold = () => {
-        if(gold === 0) {
-            setGold(0);
+    const subGold = (index) => {
+        if(characters[index].gold === 0) {
+            return;
         } else {
-            setGold(gold - 1);
+            let temp = [...characters];
+            temp[index].gold--;
+            setCharacters(temp);
         }
+    }
+
+    const perksCrement = (index, crement) => {
+
+        if(!crement) {
+            const temp = [...characters];
+            temp[index].perks--;
+            setCharacters(temp);
+          
+        } else {
+            const temp = [...characters];
+            temp[index].perks++;
+            setCharacters(temp);
+        }
+    }
+
+    const expDisplay = (index) => {
+        if(characters[index].exp >= 45 && characters[index].exp < 95) {
+            return 2;
+        } else if (characters[index].exp >= 95 && characters[index].exp < 150) {
+            return 3;
+        } else if (characters[index].exp >= 150 && characters[index].exp < 210) {
+            return 4;
+        } else if (characters[index].exp >= 210 && characters[index].exp < 275) {
+            return 5;
+        } else if (characters[index].exp >= 275 && characters[index].exp < 345) {
+            return 6;
+        } else if (characters[index].exp >= 345 && characters[index].exp < 420) {
+            return 7;
+        } else if (characters[index].exp >= 420 && characters[index].exp < 500) {
+            return 8;
+        } else if (characters[index].exp >= 500) {
+            return 9;
+        } else if (characters[index].exp < 45) {
+            return 1;
+        }
+    }
+
+
+
+
+    const perksDisplay = (index) => {
+        const checkboxes = [];
+
+        for (let row = 0; row < 2; row++) {
+          const rowCheckboxes = [];
+          for (let col = 0; col < 9; col++) {
+            const checkboxNumber = row * 9 + col + 1;
+    
+    
+            if (col % 3 === 0) {
+              rowCheckboxes.push(
+                <h3 key={`block-${row}-${col}`} className="character__list__card__front__bot-row__check">
+                  &#10003; :
+                </h3>
+              );
+            }
+
+            rowCheckboxes.push(
+                <label key={checkboxNumber}>
+                  <input type="checkbox" checked={checkboxNumber <= characters[index].perks} readOnly/>
+                </label>
+              );
+
+          }
+          checkboxes.push(<div key={`row-${row}`} className="character__list__card__front__bot-row">{rowCheckboxes}</div>);
+        }
+    
+        return checkboxes;
     }
 
     //this function determines what class img to use
@@ -167,7 +221,7 @@ function Character() {
             <div className="character__list">
                 {characters.map((data, index) => {
                     return(
-                    <div className="character__list__card">
+                    <div key={data.class} className="character__list__card">
                         <div className="character__list__card__front">
                             <div className="character__list__card__front__top">
                                 <h1 className="character__list__card__front__top-class">{data.class}</h1>
@@ -180,7 +234,7 @@ function Character() {
                                     <div className="character__list__card__front__middle-left__exp">
                                         <h3 className="character__list__card__front__middle-left__exp-title">Exp:</h3>
                                         <div className="character__list__card__front__middle-left__exp__container">
-                                            <span className="character__list__card__front__middle-left__exp__container-button" onClick={subExp}>-</span>
+                                            <span className="character__list__card__front__middle-left__exp__container-button" onClick={() => subExp(index)}>-</span>
                                             <h3 className="character__list__card__front__middle-left__exp__container-points">{data.exp}</h3>
                                             <span className="character__list__card__front__middle-left__exp__container-button" onClick={() => addExp(index)}>+</span>
                                         </div>
@@ -189,56 +243,32 @@ function Character() {
         
                                 </div>
                                 <div className="character__list__card__front__middle-right">
-                                    <h3 className="character__list__card__front__middle-right__level">Level: {level}</h3>
+                                    <h3 className="character__list__card__front__middle-right__level">Level: {expDisplay(index)}</h3>
         
                                     <div className="character__list__card__front__middle-right__gold">
                                         <h3 className="character__list__card__front__middle-right__gold-title">Gold:</h3>
                                         <div className="character__list__card__front__middle-right__gold__container">
-                                            <span className="character__list__card__front__middle-right__gold__container-button" onClick={subGold}>-</span>
-                                            <h3 className="character__list__card__front__middle-right__gold__container-points">{gold}</h3>
-                                            <span className="character__list__card__front__middle-right__gold__container-button" onClick={addGold}>+</span>  
+                                            <span className="character__list__card__front__middle-right__gold__container-button" onClick={() => subGold(index)}>-</span>
+                                            <h3 className="character__list__card__front__middle-right__gold__container-points">{data.gold}</h3>
+                                            <span className="character__list__card__front__middle-right__gold__container-button" onClick={() => addGold(index)}>+</span>  
                                         </div>
                                         
                                     </div>
                                 </div>
                             </div>
-        
+
                             <div className="character__list__card__front__bot">
-                                <div className="character__list__card__front__bot-top">
-                                    <h3 className="character__list__card__front__bot-top__check">&#10003; :
-                                        <input type="checkbox"></input>
-                                        <input type="checkbox"></input>
-                                        <input type="checkbox"></input>
-                                    </h3>
-                                    <h3 className="character__list__card__front__bot-top__check">&#10003; :
-                                        <input type="checkbox"></input>
-                                        <input type="checkbox"></input>
-                                        <input type="checkbox"></input>
-                                    </h3>
-                                    <h3 className="character__list__card__front__bot-top__check">&#10003; :
-                                        <input type="checkbox"></input>
-                                        <input type="checkbox"></input>
-                                        <input type="checkbox"></input>
-                                    </h3>
+
+                                {perksDisplay(index)}
+
+                                <div className="character__list__card__front__bot__button-container">
+                                    <button className="character__list__card__front__bot__button-container__button" onClick={() => {perksCrement(index, false)}}>-</button> 
+                                    <button className="character__list__card__front__bot__button-container__button" onClick={() => {perksCrement(index, true)}}>+</button>  
                                 </div>
-                                <div className="character__list__card__front__bot-bot">
-                                    <h3 className="character__list__card__front__bot-bot__check">&#10003; :
-                                        <input type="checkbox"></input>
-                                        <input type="checkbox"></input>
-                                        <input type="checkbox"></input>
-                                    </h3>
-                                    <h3 className="character__list__card__front__bot-bot__check">&#10003; :
-                                        <input type="checkbox"></input>
-                                        <input type="checkbox"></input>
-                                        <input type="checkbox"></input>
-                                    </h3>
-                                    <h3 className="character__list__card__front__bot-bot__check">&#10003; :
-                                        <input type="checkbox"></input>
-                                        <input type="checkbox"></input>
-                                        <input type="checkbox"></input>
-                                    </h3>
-                                </div>
+                               
                             </div>
+        
+                        
                         </div>
         
                         <div className="character__list__card__back">
