@@ -34,6 +34,7 @@ function Character() {
     let user = jwt_decode(token);
 
     const [characters, setCharacters] = useState([]);
+    const [flipCard, setFlipCard] = useState([]);
 
     useEffect(() => {
         axios.get(`http://localhost:8080/character/${user.data.party_id}`)
@@ -211,6 +212,16 @@ function Character() {
         }
     }
 
+    const flip = (index) => {
+        if(flipCard.includes(index)) {
+            setFlipCard(flipCard.filter(item => item !== index));
+            console.log(flipCard);
+        } else {
+            setFlipCard([...flipCard, index]);
+            console.log(flipCard);
+        }
+    }
+
     return(
         <section className="character">
             
@@ -221,7 +232,7 @@ function Character() {
             <div className="character__list">
                 {characters.map((data, index) => {
                     return(
-                    <div key={data.class} className="character__list__card">
+                    <div key={data.class} className={`character__list__card ${flipCard.includes(index) ? 'flipped' : ''}`} onClick={() => flip(index)}>
                         <div className="character__list__card__front">
                             <div className="character__list__card__front__top">
                                 <h1 className="character__list__card__front__top-class">{data.class}</h1>
@@ -274,7 +285,7 @@ function Character() {
                         <div className="character__list__card__back">
                             <div className="character__list__card__back__items">
                                 <h1 className="character__list__card__back__items-class">{data.class}</h1>
-                                <img alt="brute" src={Brute} className="character__list__card__back__items-img"></img>
+                                <img alt="brute" src={imgClass(data.class)} className="character__list__card__back__items-img"></img>
                                 <div className="character__list__card__back__items__gear">
                                     <div className="character__list__card__back__items__gear__left">
                                         <div className="character__list__card__back__items__gear__left__item">
