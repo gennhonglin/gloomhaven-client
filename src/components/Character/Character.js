@@ -1,4 +1,8 @@
 import "./Character.scss";
+
+import Flip from "../../assets/images/icons/return-down-forward-outline.svg";
+
+//Importing Character Class Images
 import Brute from "../../assets/images/character-imgs/Brute.webp";
 import Tinkerer from "../../assets/images/character-imgs/Tinkerer.webp";
 import Berserker from "../../assets/images/character-imgs/Berserker.webp";
@@ -17,16 +21,19 @@ import SpellWeaver from "../../assets/images/character-imgs/SpellWeaver.webp";
 import Summoner from "../../assets/images/character-imgs/Summoner.webp";
 import Sunkeeper from "../../assets/images/character-imgs/Sunkeeper.webp";
 
+//Importing Gear Components
+import HeadGear from "../HeadGear/HeadGear";
+import BodyGear from "../BodyGear/BodyGear";
+import BootGear from "../BootGear/BootGear";
+import HandGear from "../HandGear/HandGear";
+import HandGearSecond from "../HandGearSecond/HandGearSecond";
+import SmallItemOne from "../SmallItemOne/SmallItemOne";
+import SmallItemTwo from "../SmallItemTwo/SmallItemTwo";
+import SmallItemThree from "../SmallItemThree/SmallItemThree";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import striding from "../../assets/images/item-imgs/boots-of-striding.png";
-import heater from "../../assets/images/item-imgs/heater-shield.png";
-import dagger from "../../assets/images/item-imgs/poison-dagger.png";
-import hide from "../../assets/images/item-imgs/hide-armor.png";
-import minor from "../../assets/images/item-imgs/minor-healing.png";
-import stamina from "../../assets/images/item-imgs/minor-stamina.png";
-import helmet from "../../assets/images/item-imgs/iron-helmet.png";
 import { Link } from "react-router-dom";
 
 function Character() {
@@ -35,6 +42,20 @@ function Character() {
 
     const [characters, setCharacters] = useState([]);
     const [flipCard, setFlipCard] = useState([]);
+    const [dualWield, setDualWield] = useState([]);
+
+    const [displayHeadGear, setDisplayHeadGear] = useState(false);
+    const [displayBodyGear, setDisplayBodyGear] = useState(false);
+    const [displayHandGear, setDisplayHandGear] = useState(false);
+    const [displayHandGearSecond, setDisplayHandGearSecond] = useState(false);
+    const [displayBootGear, setDisplayBootGear] = useState(false);
+    const [displaySmallItemOne, setDisplaySmallItemOne] = useState(false);
+    const [displaySmallItemTwo, setDisplaySmallItemTwo] = useState(false);
+    const [displaySmallItemThree, setDisplaySmallItemThree] = useState(false);
+
+    const [displayItems, setDisplayItems] = useState("character__list__card__back__items");
+
+
 
     useEffect(() => {
         axios.get(`http://localhost:8080/character/${user.data.party_id}`)
@@ -215,11 +236,261 @@ function Character() {
     const flip = (index) => {
         if(flipCard.includes(index)) {
             setFlipCard(flipCard.filter(item => item !== index));
-            console.log(flipCard);
         } else {
             setFlipCard([...flipCard, index]);
-            console.log(flipCard);
         }
+    }
+
+    const dual = (index) => (checkDual) => {
+        if(checkDual === true && dualWield.includes(index)) {
+            setDualWield(dualWield.filter(item => item !== index));
+        } else {
+            setDualWield([...dualWield, index]);
+        }
+    }
+
+    const checkHead = (gear) => {
+        if(gear === null) {
+            return (      
+            <div className="character__list__card__back__items__gear__left__item">
+                <h3 className="character__list__card__back__items__gear__left__item-title">Head:</h3>
+                <div className="character__list__card__back__items__gear__left__item-null" onClick={() => {hideGear(true); setDisplayHeadGear(true);}}>
+                    <h2 className="character__list__card__back__items__gear__left__item-null__plus">+</h2>
+                </div>
+            </div>
+            );
+        } else {
+            return(
+                <div className="character__list__card__back__items__gear__left__item">
+                    <h3 className="character__list__card__back__items__gear__left__item-title">Head:</h3>
+                    <img alt="boots-of-striding" src={gear} className="character__list__card__back__items__gear__left__item-img" onClick={() => {hideGear(true); setDisplayHeadGear(true);}}></img>
+                </div>
+            );
+        }
+    }
+
+    
+    const checkBody = (body) => {
+        if(body === null) {
+            return (
+                <div className="character__list__card__back__items__gear__left__item">
+                    <h3 className="character__list__card__back__items__gear__left__item-title">Body:</h3>
+                    <div className="character__list__card__back__items__gear__left__item-null" onClick={() => {hideGear(true); setDisplayBodyGear(true);}}>
+                        <h2 className="character__list__card__back__items__gear__left__item-null__plus">+</h2>
+                    </div>
+                </div>
+            );
+        } else {
+            return(
+                <div className="character__list__card__back__items__gear__left__item">
+                    <h3 className="character__list__card__back__items__gear__left__item-title">Body:</h3>
+                    <img alt="boots-of-striding" src={body} className="character__list__card__back__items__gear__left__item-img" onClick={() => {hideGear(true); setDisplayBodyGear(true);}}></img>
+                </div>
+            );
+        }
+    }
+
+    const checkHands = (chosenHand) => {
+            if(chosenHand === null) {
+
+                return(
+                    <div className="character__list__card__back__items__gear__left__item">
+                        <h3 className="character__list__card__back__items__gear__left__item-title">Hand:</h3>
+                        <div className="character__list__card__back__items__gear__left__item-null" onClick={() => {hideGear(true); setDisplayHandGear(true);}}>
+                            <h2 className="character__list__card__back__items__gear__left__item-null__plus">+</h2>
+                        </div>
+                    </div> 
+                );
+            } else {
+                return(
+                    <div className="character__list__card__back__items__gear__left__item">
+                        <h3 className="character__list__card__back__items__gear__left__item-title">Hand:</h3>
+                        <img alt="boots-of-striding" src={chosenHand} className="character__list__card__back__items__gear__left__item-img" onClick={() => {hideGear(true); setDisplayHandGear(true);}}></img>
+                    </div> 
+                );
+            }
+        
+    }
+
+    const checkBoot = (boots) => {
+        if(boots === null) {
+            return (
+                <div className="character__list__card__back__items__gear__left__item">
+                    <h3 className="character__list__card__back__items__gear__left__item-title">Boots:</h3>
+                    <div className="character__list__card__back__items__gear__left__item-null" onClick={() => {hideGear(true); setDisplayBootGear(true);}}>
+                        <h2 className="character__list__card__back__items__gear__left__item-null__plus">+</h2>
+                    </div>
+                </div>
+            );
+        } else {
+            return(
+                <div className="character__list__card__back__items__gear__left__item">
+                    <h3 className="character__list__card__back__items__gear__left__item-title">Boots:</h3>
+                    <img alt="boots-of-striding" src={boots} className="character__list__card__back__items__gear__left__item-img" onClick={() => {hideGear(true); setDisplayBootGear(true);}}></img>
+                </div>
+            );
+        }
+    }
+
+    
+    const checkHandSecond = (chosenHandSecond) => {
+        if(chosenHandSecond === null) {
+            return (      
+            <div className="create-form__card__items__right__gear">
+                <h3 className="create-form__card__items__right__gear-title">Hands</h3>
+                <div className="create-form__card__items__right__gear-add" onClick={() => {hideGear(true); setDisplayHandGearSecond(true);}}>
+                    <h2 className="create-form__card__items__right__gear-add__plus">+</h2>
+                </div>
+            </div>);
+        } else {
+            return (      
+                <div className="create-form__card__items__right__gear">
+                    <h3 className="create-form__card__items__right__gear-title">Hands</h3>
+                    <img className="create-form__card__items__right__gear-img" alt="right-hand-gear" src={chosenHandSecond} onClick={() => {hideGear(true); setDisplayHandGearSecond(true);}}></img>
+                </div>);
+        }
+    }
+
+    const checkSmallItemOne = (smallItemOne) => {
+        if(smallItemOne === null) {
+            return(
+                <div className="character__list__card__back__items__gear__right__item">
+                    <h3 className="character__list__card__back__items__gear__right__item-title">Small Item:</h3>
+                    <div className="character__list__card__back__items__gear__right__item-null" onClick={() => {hideGear(true); setDisplaySmallItemOne(true);}}>
+                        <h2 className="character__list__card__back__items__gear__right__item-null__plus">+</h2>
+                    </div>
+                </div>
+            );
+        } else {
+            return(
+                <div className="character__list__card__back__items__gear__right__item">
+                    <h3 className="character__list__card__back__items__gear__right__item-title">Small Item:</h3>
+                    <img alt="boots-of-striding" src={smallItemOne} className="character__list__card__back__items__gear__right__item-img" onClick={() => {hideGear(true); setDisplaySmallItemOne(true);}}></img>
+                </div>
+            );
+        }
+    }
+
+    const checkSmallItemTwo = (smallItemTwo) => {
+        if(smallItemTwo === null) {
+            return(
+                <div className="character__list__card__back__items__gear__right__item">
+                    <h3 className="character__list__card__back__items__gear__right__item-title">Small Item:</h3>
+                    <div className="character__list__card__back__items__gear__right__item-null" onClick={() => {hideGear(true); setDisplaySmallItemTwo(true);}}>
+                        <h2 className="character__list__card__back__items__gear__right__item-null__plus">+</h2>
+                    </div>
+                </div>
+            )
+        } else {
+            return (      
+                <div className="character__list__card__back__items__gear__right__item">
+                    <h3 className="character__list__card__back__items__gear__right__item-title">Small Item:</h3>
+                    <img alt="boots-of-striding" src={smallItemTwo} className="character__list__card__back__items__gear__right__item-img" onClick={() => {hideGear(true); setDisplaySmallItemTwo(true);}}></img>
+                </div>
+            );
+        }
+    }
+
+    const checkSmallItemThree = (smallItemThree) => {
+        if(smallItemThree === null) {
+            return(
+                <div className="character__list__card__back__items__gear__right__item">
+                    <h3 className="character__list__card__back__items__gear__right__item-title">Small Item:</h3>
+                    <div className="character__list__card__back__items__gear__right__item-null" onClick={() => {hideGear(true); setDisplaySmallItemThree(true);}}>
+                        <h2 className="character__list__card__back__items__gear__right__item-null__plus">+</h2>
+                    </div>
+                </div>
+            )
+        } else {
+            return (      
+                <div className="character__list__card__back__items__gear__right__item">
+                    <h3 className="character__list__card__back__items__gear__right__item-title">Small Item:</h3>
+                    <img alt="boots-of-striding" src={smallItemThree} className="character__list__card__back__items__gear__right__item-img" onClick={() => {hideGear(true); setDisplaySmallItemThree(true);}}></img>
+                </div>
+            );
+        }
+    }
+
+    const hideGear = (gear) => {
+        if(gear === true) {
+            setDisplayItems("character__list__card__back__items hidden");
+        } else {
+            setDisplayItems("character__list__card__back__items");
+        }
+    }
+
+    const chosenHead = (index) => (head) => {
+        const temp = [...characters];
+        temp[index].head_gear = head;
+        setCharacters(temp);
+    }
+
+    const chosenBody = (index) => (body) => {
+        const temp = [...characters];
+        temp[index].body_gear = body;
+        setCharacters(temp);
+    }
+
+    const chosenBoot = (index) => (boot) => {
+        const temp = [...characters];
+        temp[index].boots_gear = boot;
+        setCharacters(temp);
+    }
+
+    const chosenHand = (index) => (left) => {
+        const temp = [...characters];
+
+        if(!dualWield.includes(index) && temp[index].right_hand_gear === null) {
+            temp[index].left_hand_gear = left;
+            setCharacters(temp);
+        } else if(!dualWield.includes(index) && temp[index].right_hand_gear !== null){
+            temp[index].left_hand_gear = left;
+            temp[index].right_hand_gear = null;
+            setCharacters(temp);
+        } else {
+            temp[index].left_hand_gear = left;
+            setCharacters(temp);
+        }
+    }
+
+    const chosenHandSecond = (index) => (right) => {
+        const temp = [...characters];
+        if(!dualWield.includes(index) && temp[index].left_hand_gear === null) {
+            temp[index].right_hand_gear = right;
+            setCharacters(temp);
+        } else if(!dualWield.includes(index) && temp[index].left_hand_gear !== null){
+            temp[index].right_hand_gear = right;
+            temp[index].left_hand_gear = null;
+            setCharacters(temp);
+        } else {
+            temp[index].right_hand_gear = right;
+            setCharacters(temp);
+        }
+    }
+
+    const chosenDualWield = (index) => (dual) => {
+        const temp = [...characters];
+        temp[index].left_hand_gear = dual;
+        temp[index].right_hand_gear = dual;
+        setCharacters(temp);
+    }
+
+    const chosenSmallItemOne = (index) => (smallItemOne) => {
+        const temp = [...characters];
+        temp[index].small_item_one = smallItemOne;
+        setCharacters(temp);
+    }
+
+    const chosenSmallItemTwo = (index) => (smallItemTwo) => {
+        const temp = [...characters];
+        temp[index].small_item_two = smallItemTwo;
+        setCharacters(temp);
+    }
+
+    const chosenSmallItemThree = (index) => (smallItemThree) => {
+        const temp = [...characters];
+        temp[index].small_item_three = smallItemThree;
+        setCharacters(temp);
     }
 
     return(
@@ -232,11 +503,13 @@ function Character() {
             <div className="character__list">
                 {characters.map((data, index) => {
                     return(
-                    <div key={data.class} className={`character__list__card ${flipCard.includes(index) ? 'flipped' : ''}`} onClick={() => flip(index)}>
+                    <div key={data.class} className={`character__list__card ${flipCard.includes(index) ? 'flipped' : ''}`}>
+                        <div className="character__list__card__gradient"></div>
+                        <img alt={data.class} src={imgClass(data.class)} className="character__list__card-img"></img>
                         <div className="character__list__card__front">
                             <div className="character__list__card__front__top">
                                 <h1 className="character__list__card__front__top-class">{data.class}</h1>
-                                <img alt="brute" src={imgClass(data.class)} className="character__list__card__front__top-img"></img>
+                                <img alt="flip-icon" src={Flip} className="character__list__card__front__top-flip" onClick={() => flip(index)}></img>
                             </div>
         
                             <div className="character__list__card__front__middle">
@@ -283,54 +556,46 @@ function Character() {
                         </div>
         
                         <div className="character__list__card__back">
-                            <div className="character__list__card__back__items">
+                            <div className={displayItems}>
                                 <h1 className="character__list__card__back__items-class">{data.class}</h1>
-                                <img alt="brute" src={imgClass(data.class)} className="character__list__card__back__items-img"></img>
+                                <img alt="flip-icon" src={Flip} className="character__list__card__back__items-flip" onClick={() => flip(index)}></img>
+                                <div className="character__list__card__gradient"></div>
+                                <img alt={data.class} src={imgClass(data.class)} className="character__list__card__back__items-img"></img>
                                 <div className="character__list__card__back__items__gear">
                                     <div className="character__list__card__back__items__gear__left">
-                                        <div className="character__list__card__back__items__gear__left__item">
-                                            <h3 className="character__list__card__back__items__gear__left__item-title">Head:</h3>
-                                            <img alt="boots-of-striding" src={data.head_gear} className="character__list__card__back__items__gear__left__item-img"></img>
-                                        </div>
+
+                                        {checkHead(data.head_gear)}
+
+                                        {checkBody(data.body_gear)}
         
-                                        <div className="character__list__card__back__items__gear__left__item">
-                                            <h3 className="character__list__card__back__items__gear__left__item-title">Body:</h3>
-                                            <img alt="boots-of-striding" src={hide} className="character__list__card__back__items__gear__left__item-img"></img>
-                                        </div>
-        
-                                        <div className="character__list__card__back__items__gear__left__item">
-                                            <h3 className="character__list__card__back__items__gear__left__item-title">Hand:</h3>
-                                            <img alt="boots-of-striding" src={heater} className="character__list__card__back__items__gear__left__item-img"></img>
-                                        </div>
+                                        {checkHands(data.left_hand_gear)}
                                         
-                                        <div className="character__list__card__back__items__gear__left__item">
-                                            <h3 className="character__list__card__back__items__gear__left__item-title">Boots:</h3>
-                                            <img alt="boots-of-striding" src={striding} className="character__list__card__back__items__gear__left__item-img"></img>
-                                        </div>
+                                        {checkBoot(data.boots_gear)}
                                     </div>
                                     <div className="character__list__card__back__items__gear__right">
-                                        <div className="character__list__card__back__items__gear__right__item">
-                                            <h3 className="character__list__card__back__items__gear__right__item-title">Potion:</h3>
-                                            <img alt="boots-of-striding" src={minor} className="character__list__card__back__items__gear__right__item-img"></img>
-                                        </div>
+                                        {checkSmallItemOne(data.small_item_one)}
         
-                                        <div className="character__list__card__back__items__gear__right__item">
-                                            <h3 className="character__list__card__back__items__gear__right__item-title">Potion:</h3>
-                                            <img alt="boots-of-striding" src={minor} className="character__list__card__back__items__gear__right__item-img"></img>
-                                        </div>
+                                        {checkSmallItemTwo(data.small_item_two)}
         
-                                        <div className="character__list__card__back__items__gear__right__item">
+                                        {/* <div className="character__list__card__back__items__gear__right__item">
                                             <h3 className="character__list__card__back__items__gear__right__item-title">Hand:</h3>
                                             <img alt="boots-of-striding" src={dagger} className="character__list__card__back__items__gear__right__item-img"></img>
-                                        </div>
+                                        </div> */}
+
+                                        {checkHandSecond(data.right_hand_gear)}
         
-                                        <div className="character__list__card__back__items__gear__right__item">
-                                            <h3 className="character__list__card__back__items__gear__right__item-title">Potion:</h3>
-                                            <img alt="boots-of-striding" src={stamina} className="character__list__card__back__items__gear__right__item-img"></img>
-                                        </div>
+                                        {checkSmallItemThree(data.small_item_three)}
                                     </div>
                                 </div>
                             </div>
+                            <HeadGear displayHeadGear = {displayHeadGear} displayHeadChange = {setDisplayHeadGear} displayHeadComp = {hideGear} chosenHead = {chosenHead(index)} />
+                            <BodyGear displayBodyGear = {displayBodyGear} displayBodyChange = {setDisplayBodyGear} displayBodyComp = {hideGear} chosenBody = {chosenBody(index)}/>
+                            <BootGear displayBootGear = {displayBootGear} displayBootChange = {setDisplayBootGear} displayBootComp = {hideGear} chosenBoot = {chosenBoot(index)}/>
+                            <HandGear displayHandGear = {displayHandGear} displayHandChange = {setDisplayHandGear} displayHandComp = {hideGear}  chosenHand = {chosenHand(index)} chosenHandSecond = {chosenHandSecond(index)} chosenDualHanded = {chosenDualWield(index)} dualWield = {dual(index)}/>
+                            <HandGearSecond displayHandGear = {displayHandGearSecond} displayHandChange = {setDisplayHandGearSecond} displayHandComp = {hideGear} chosenHand = {chosenHandSecond(index)} chosenHandSecond = {chosenHand(index)} chosenDualHanded = {chosenDualWield(index)} dualWield = {dual(index)} />
+                            <SmallItemOne displaySmallItemOne = {displaySmallItemOne} displaySmallItemChange = {setDisplaySmallItemOne} displaySmallItemComp = {hideGear} chosenSmallItem = {chosenSmallItemOne(index)}></SmallItemOne>
+                            <SmallItemTwo displaySmallItemOne = {displaySmallItemTwo} displaySmallItemChange = {setDisplaySmallItemTwo} displaySmallItemComp = {hideGear} chosenSmallItem = {chosenSmallItemTwo(index)}></SmallItemTwo>
+                            <SmallItemThree displaySmallItemOne = {displaySmallItemThree} displaySmallItemChange = {setDisplaySmallItemThree} displaySmallItemComp = {hideGear} chosenSmallItem = {chosenSmallItemThree(index)}></SmallItemThree>
                         </div>
                     </div>
                     )

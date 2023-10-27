@@ -29,78 +29,78 @@ function HeadGear(props) {
                     <div className="head-gear__container__left">
                         <div className="head-gear__container__left__items">
                             <h3 className="head-gear__container__left__items-title">Eagle-Eye Goggles</h3>
-                            <img className="head-gear__container__left__items-img" src={eagle} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(eagle);}}></img>
+                            <img alt="Eagle-Eye Goggles" className="head-gear__container__left__items-img" src={eagle} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(eagle);}}></img>
                         </div>
                         <div className="head-gear__container__left__items">
                             <h3 className="head-gear__container__left__items-title">Empowering Talisman</h3>
-                            <img className="head-gear__container__left__items-img" src={empowering} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(empowering);}}></img>
+                            <img alt="Empowering Talisman" className="head-gear__container__left__items-img" src={empowering} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(empowering);}}></img>
                         </div>
                         <div className="head-gear__container__left__items">
                             <h3 className="head-gear__container__left__items-title">Hawk Helm</h3>
-                            <img className="head-gear__container__left__items-img" src={hawk} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(hawk);}}></img>
+                            <img alt="Hawk Helm" className="head-gear__container__left__items-img" src={hawk} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(hawk);}}></img>
                         </div>
                         <div className="head-gear__container__left__items">
                             <h3 className="head-gear__container__left__items-title">Pendant of Dark Pacts</h3>
-                            <img className="head-gear__container__left__items-img" src={pendant} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(pendant);}}></img>
+                            <img alt="Pendant of Dark Pacts" className="head-gear__container__left__items-img" src={pendant} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(pendant);}}></img>
                         </div>
                         <div className="head-gear__container__left__items">
                             <h3 className="head-gear__container__left__items-title">Telescopic Lens</h3>
-                            <img className="head-gear__container__left__items-img" src={telescopic} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(telescopic);}}></img>
+                            <img alt="Telescopic Lens" className="head-gear__container__left__items-img" src={telescopic} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(telescopic);}}></img>
                         </div>
                         <div className="head-gear__container__left__items">
                             <h3 className="head-gear__container__left__items-title">Circlet of Elements</h3>
-                            <img className="head-gear__container__left__items-img" src={circlet} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(circlet);}}></img>
+                            <img alt="Circlet of Elements" className="head-gear__container__left__items-img" src={circlet} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(circlet);}}></img>
                         </div>
                         <div className="head-gear__container__left__items">
                             <h3 className="head-gear__container__left__items-title">Necklace of Teeth</h3>
-                            <img className="head-gear__container__left__items-img" src={necklace} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(necklace);}}></img>
+                            <img alt="Necklace of Teeth" className="head-gear__container__left__items-img" src={necklace} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(necklace);}}></img>
                         </div>
                         <div className="head-gear__container__left__items">
                             <h3 className="head-gear__container__left__items-title">Drakescale Helm</h3>
-                            <img className="head-gear__container__left__items-img" src={drakescale} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(drakescale);}}></img>
+                            <img alt="Drakescale Helm" className="head-gear__container__left__items-img" src={drakescale} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(drakescale);}}></img>
                         </div>
                         <div className="head-gear__container__left__items">
                             <h3 className="head-gear__container__left__items-title">Helm of the Mountain</h3>
-                            <img className="head-gear__container__left__items-img" src={helm} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(helm);}}></img>
+                            <img alt="Helm of the Mountain" className="head-gear__container__left__items-img" src={helm} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(helm);}}></img>
                         </div>
                     </div>
 
                     <div className="head-gear__container__right">
                         <div className="head-gear__container__right__items">
                             <h3 className="head-gear__container__right__items-title">Iron Helmet</h3>
-                            <img className="head-gear__container__right__items-img" src={iron} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(iron);}}></img>
+                            <img alt="Iron Helmet" className="head-gear__container__right__items-img" src={iron} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(iron);}}></img>
                         </div>
                         <div className="head-gear__container__right__items">
                             <h3 className="head-gear__container__right__items-title">Amulet of Life</h3>
-                            <img className="head-gear__container__right__items-img" src={amulet} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(amulet);}}></img>
+                            <img alt="Amulet of Life" className="head-gear__container__right__items-img" src={amulet} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(amulet);}}></img>
                         </div>
                         <div className="head-gear__container__right__items">
                             <h3 className="head-gear__container__right__items-title">Heavy Basinet</h3>
-                            <img className="head-gear__container__right__items-img" src={heavy} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(heavy);}}></img>
+                            <img alt="Heavy Basinet" className="head-gear__container__right__items-img" src={heavy} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(heavy);}}></img>
                         </div>
                         <div className="head-gear__container__right__items">
                             <h3 className="head-gear__container__right__items-title">Protective Charm</h3>
-                            <img className="head-gear__container__right__items-img" src={protective} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(protective);}}></img>
+                            <img alt="Protective Charm" className="head-gear__container__right__items-img" src={protective} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(protective);}}></img>
                         </div>
                         <div className="head-gear__container__right__items">
                             <h3 className="head-gear__container__right__items-title">Mask of Terror</h3>
-                            <img className="head-gear__container__right__items-img" src={mask} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(mask);}}></img>
+                            <img alt="Mask of Terror" className="head-gear__container__right__items-img" src={mask} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(mask);}}></img>
                         </div>
                         <div className="head-gear__container__right__items">
                             <h3 className="head-gear__container__right__items-title">Chain Hood</h3>
-                            <img className="head-gear__container__right__items-img" src={chain} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(chain);}}></img>
+                            <img alt="Chain Hood" className="head-gear__container__right__items-img" src={chain} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(chain);}}></img>
                         </div>
                         <div className="head-gear__container__right__items">
                             <h3 className="head-gear__container__right__items-title">Horned Helm</h3>
-                            <img className="head-gear__container__right__items-img" src={horned} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(horned);}}></img>
+                            <img alt="Horned Helm" className="head-gear__container__right__items-img" src={horned} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(horned);}}></img>
                         </div>
                         <div className="head-gear__container__right__items">
                             <h3 className="head-gear__container__right__items-title">Thief's Hood</h3>
-                            <img className="head-gear__container__right__items-img" src={thief} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(thief);}}></img>
+                            <img alt="Thief's Hood" className="head-gear__container__right__items-img" src={thief} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(thief);}}></img>
                         </div>
                         <div className="head-gear__container__right__items">
                             <h3 className="head-gear__container__right__items-title">Wave Crest</h3>
-                            <img className="head-gear__container__right__items-img" src={wave} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(wave);}}></img>
+                            <img alt="Wave Crest" className="head-gear__container__right__items-img" src={wave} onClick={()=> { props.displayHeadChange(false); props.displayHeadComp("create-form__card__items"); props.chosenHead(wave);}}></img>
                         </div>
                         
                     </div>

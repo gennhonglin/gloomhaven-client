@@ -6,6 +6,8 @@ import BootGear from "../BootGear/BootGear";
 import HandGear from "../HandGear/HandGear";
 import HandGearSecond from "../HandGearSecond/HandGearSecond";
 import SmallItemOne from "../SmallItemOne/SmallItemOne";
+import SmallItemTwo from "../SmallItemTwo/SmallItemTwo";
+import SmallItemThree from "../SmallItemThree/SmallItemThree";
 
 //Import Class Images
 import Brute from "../../assets/images/character-imgs/Brute.webp";
@@ -26,8 +28,6 @@ import SpellWeaver from "../../assets/images/character-imgs/SpellWeaver.webp";
 import Summoner from "../../assets/images/character-imgs/Summoner.webp";
 import Sunkeeper from "../../assets/images/character-imgs/Sunkeeper.webp";
 import { useEffect, useRef, useState } from "react";
-import SmallItemTwo from "../SmallItemTwo/SmallItemTwo";
-import SmallItemThree from "../SmallItemThree/SmallItemThree";
 import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
@@ -168,7 +168,7 @@ function CreateCharacterForm() {
         }
 
         axios.post('http://localhost:8080/character', newChar);
-        navigate('/homepage');
+        navigate(-1);
 
     }
 
