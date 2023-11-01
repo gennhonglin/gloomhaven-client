@@ -47,13 +47,19 @@ function Reputation({rep}) {
 
     return(
         <section className="reputation">
-            <h2 className="reputation__title">Reputation</h2>
+            <header className="reputation__title__container">
+                <h2 className="reputation__title__container-title">Reputation</h2>
+            </header>
+            <h2 className="reputation__rep">Rep</h2>
             <div className="reputation__input">
-                <button onClick={minusButton}>-</button>
                 <input type="range" min="-20" max="20" value={sliderValue} onChange={e => setSliderValue(parseInt(e.target.value), 10)} className="reputation__input-slider"></input>
-                <button onClick={plusButton}>+</button>
             </div>
-            <h3>{sliderValue}</h3>
+
+            <div className="reputation__crement">
+                <button className="reputation__crement-button" onClick={minusButton}>-</button>
+                <h3 className="reputation__crement-display">{sliderValue}</h3>
+                <button className="reputation__crement-button" onClick={plusButton}>+</button>
+            </div>
         </section>
     )
 }

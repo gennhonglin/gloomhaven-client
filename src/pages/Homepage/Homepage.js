@@ -24,11 +24,15 @@ function Homepage() {
 
 
     return(
-        <div>
+        <div className="homepage">
             <Header />
             <Character />
-            {data && <Prosperity prosperity = {data.prosperity_points}/>}
-            {data && <Reputation rep = {data.reputation} />}
+            <div className="homepage__container">
+                <div className="homepage__container-background">
+                    {data && <Prosperity prosperity = {data.prosperity_points}/>}
+                    {data && <Reputation rep = {data.reputation} />}
+                </div>
+            </div>
             <Footer />
         </div>
     )

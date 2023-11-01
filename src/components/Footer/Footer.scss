@@ -1,5 +1,16 @@
 .footer {
-    height: 300px;
+    height: 6.25rem;
     width: 100%;
-    background-color: burlywood;
+    background-color: #3C4662;
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        &-copyright {
+            padding: 1rem;
+            text-align: center;
+            color: white;
+            font-size: .875rem;
+        }
+    }
 }

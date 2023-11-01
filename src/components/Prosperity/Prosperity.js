@@ -42,7 +42,7 @@ function Prosperity({prosperity}) {
             setProsperityLevel(5);
         } else if(prosperityPoint >= 31 && prosperityPoint < 40) {
             setProsperityLevel(6);
-        } else if(prosperityPoint >= 40 && prosperityPoint< 51) {
+        } else if(prosperityPoint >= 40 && prosperityPoint < 51) {
             setProsperityLevel(7);
         } else if(prosperityPoint >= 51 && prosperityPoint < 65) {
             setProsperityLevel(8);
@@ -75,13 +75,19 @@ function Prosperity({prosperity}) {
 
     return(
         <section className="prosperity">
-            <h2 className="prosperity__title">Prosperity Level: {prosperityLevel}</h2>
-            <div className="prosperity__input">
-                <button onClick={minusButton}>-</button>
-                <input type="range" min="0" max="100" value={prosperityPoint} onChange={e => {sliderUpdate(parseInt(e.target.value,10));}} className="prosperity__input-slider"></input>
-                <button onClick={plusButton}>+</button>
-            </div>
-            <h3>{prosperityPoint}</h3>
+                <header className="prosperity__title__container">
+                    <h2 className="prosperity__title__container-title">Prosperity</h2>
+                </header>
+                <h2 className="prosperity__level">Prosperity Level: {prosperityLevel}</h2>
+                <div className="prosperity__input">
+                    <input type="range" min="0" max="100" value={prosperityPoint} onChange={e => {sliderUpdate(parseInt(e.target.value,10));}} className="prosperity__input-slider"></input>
+
+                </div>
+                <div className="prosperity__crement">
+                    <button className="prosperity__crement-button" onClick={minusButton}>-</button>
+                    <h3 className="prosperity__crement-display">{prosperityPoint}</h3>
+                    <button className="prosperity__crement-button" onClick={plusButton}>+</button>
+                </div>
         </section>
     )
 }
