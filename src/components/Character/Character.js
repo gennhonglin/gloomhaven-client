@@ -3,7 +3,7 @@ import "./Character.scss";
 import Flip from "../../assets/images/icons/return-down-forward-outline.svg";
 
 //Importing Character Class Images
-import Brute from "../../assets/images/character-imgs/Brute.webp";
+import Brute from "../../assets/images/character-imgs/Brute.jpg";
 import Tinkerer from "../../assets/images/character-imgs/Tinkerer.webp";
 import Berserker from "../../assets/images/character-imgs/Berserker.webp";
 import BeastTyrant from "../../assets/images/character-imgs/Beast-Tyrant.webp";
@@ -576,11 +576,6 @@ function Character() {
                                         {checkSmallItemOne(data.small_item_one)}
         
                                         {checkSmallItemTwo(data.small_item_two)}
-        
-                                        {/* <div className="character__list__card__back__items__gear__right__item">
-                                            <h3 className="character__list__card__back__items__gear__right__item-title">Hand:</h3>
-                                            <img alt="boots-of-striding" src={dagger} className="character__list__card__back__items__gear__right__item-img"></img>
-                                        </div> */}
 
                                         {checkHandSecond(data.right_hand_gear)}
         

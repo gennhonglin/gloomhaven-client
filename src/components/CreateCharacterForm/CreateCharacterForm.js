@@ -10,7 +10,7 @@ import SmallItemTwo from "../SmallItemTwo/SmallItemTwo";
 import SmallItemThree from "../SmallItemThree/SmallItemThree";
 
 //Import Class Images
-import Brute from "../../assets/images/character-imgs/Brute.webp";
+import Brute from "../../assets/images/character-imgs/Brute.jpg";
 import Tinkerer from "../../assets/images/character-imgs/Tinkerer.webp";
 import Berserker from "../../assets/images/character-imgs/Berserker.webp";
 import BeastTyrant from "../../assets/images/character-imgs/Beast-Tyrant.webp";
