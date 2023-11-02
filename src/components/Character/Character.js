@@ -4,22 +4,22 @@ import Flip from "../../assets/images/icons/return-down-forward-outline.svg";
 
 //Importing Character Class Images
 import Brute from "../../assets/images/character-imgs/Brute.jpg";
-import Tinkerer from "../../assets/images/character-imgs/Tinkerer.webp";
-import Berserker from "../../assets/images/character-imgs/Berserker.webp";
-import BeastTyrant from "../../assets/images/character-imgs/Beast-Tyrant.webp";
-import Cragheart from "../../assets/images/character-imgs/Cragheart.webp";
-import Doomstalker from "../../assets/images/character-imgs/Doomstalker.webp";
-import Elementalist from "../../assets/images/character-imgs/Elementalist.webp";
-import Mindthief from "../../assets/images/character-imgs/Mindthief.webp";
-import Nightshroud from "../../assets/images/character-imgs/Nightshroud.webp";
-import PlagueHerald from "../../assets/images/character-imgs/PlagueHerald.webp";
-import QuarterMaster from "../../assets/images/character-imgs/Quartermaster.webp";
-import Sawbones from "../../assets/images/character-imgs/Sawbones.webp";
-import Scoundrel from "../../assets/images/character-imgs/Scoundrel.webp";
-import Soothsinger from "../../assets/images/character-imgs/Soothsinger.webp";
-import SpellWeaver from "../../assets/images/character-imgs/SpellWeaver.webp";
-import Summoner from "../../assets/images/character-imgs/Summoner.webp";
-import Sunkeeper from "../../assets/images/character-imgs/Sunkeeper.webp";
+import Tinkerer from "../../assets/images/character-imgs/Tinkerer.jpg";
+import Berserker from "../../assets/images/character-imgs/Berserker.jpg";
+import BeastTyrant from "../../assets/images/character-imgs/Beast-Tyrant.jpg";
+import Cragheart from "../../assets/images/character-imgs/Cragheart.jpg";
+import Doomstalker from "../../assets/images/character-imgs/Doomstalker.jpg";
+import Elementalist from "../../assets/images/character-imgs/Elementalist.jpg";
+import Mindthief from "../../assets/images/character-imgs/Mindthief.jpg";
+import Nightshroud from "../../assets/images/character-imgs/Nightshroud.jpg";
+import PlagueHerald from "../../assets/images/character-imgs/PlagueHerald.jpg";
+import QuarterMaster from "../../assets/images/character-imgs/Quartermaster.jpg";
+import Sawbones from "../../assets/images/character-imgs/Sawbones.jpg";
+import Scoundrel from "../../assets/images/character-imgs/Scoundrel.jpg";
+import Soothsinger from "../../assets/images/character-imgs/Soothsinger.jpg";
+import SpellWeaver from "../../assets/images/character-imgs/SpellWeaver.jpg";
+import Summoner from "../../assets/images/character-imgs/Summoner.jpg";
+import Sunkeeper from "../../assets/images/character-imgs/Sunkeeper.jpg";
 
 //Importing Gear Components
 import HeadGear from "../HeadGear/HeadGear";
