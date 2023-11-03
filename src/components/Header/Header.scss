@@ -1,0 +1,88 @@
+.header {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    position: sticky;
+    top: 0px;
+    background-color: #783F20;
+    z-index: 99;
+    &__nav {
+        display: flex;
+        width: 100%;
+        gap: 2.5rem;
+
+        &__logo {
+            &-img {
+                height: 3.125rem;
+                width: 100%;
+            }
+        }
+
+        &-hamburger {
+            position: relative;
+            display: block;
+            width: 3.125rem;
+            height: 3.125rem;
+            cursor: pointer;
+            appearance: none;
+            background: none;
+            outline: none;
+            border: none;
+            z-index: 99;
+
+            &__bar, &::before, &::after {
+                content: ' ';
+                display: block;
+                width: 100%;
+                height: 5px;
+                background-color: #FFE0BA;
+                margin: 6px 0;
+                transition: 0.4s; 
+            }
+         }
+
+         &-hamburger.is-active::before {
+            transform: rotate(-45deg) translate(-7px, 6px);
+         }
+
+         &-hamburger.is-active::after {
+            transform: rotate(45deg) translate(-9px, -9px);
+         }
+
+         &-hamburger.is-active .header__nav-hamburger__bar {
+            opacity: 0;
+         }
+
+        
+
+        &__list {
+            list-style: none;
+            padding-left: 0;
+            position: fixed;
+            width: 100%;
+            min-height: 100vh;
+            top: 2.6875rem;
+            left: 100%;
+            z-index: 98;
+            display: block;
+            background-color: #783F20;
+            padding-top: 7.5rem;
+            transition: 0.4s;
+
+            &-item {
+                width: 50%;
+                display: block;
+                text-decoration: none;
+                color: #330000;
+                font-size: 24px;
+                text-align: center;
+                margin: 0 auto 1rem;
+                padding: 0.75rem 1rem;
+                background-color: #FFE0BA;
+            }
+        }
+
+        &__list.is-active {
+            left: 0;
+        }
+    }
+}

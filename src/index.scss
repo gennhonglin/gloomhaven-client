@@ -1,0 +1,9 @@
+@use "./styles/partials/fonts" as *;
+
+
+* {
+  margin: 0;
+  font-family: 'Pirata One', cursive;
+  font-weight: 400;
+  box-sizing: border-box;
+}
